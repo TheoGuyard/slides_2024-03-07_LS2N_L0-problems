@@ -1,0 +1,105 @@
+\section{Supplementary Slides}
+
+\begin{frame}[noframenumbering]{Why solving L0 problems ?}
+    \begin{tikzpicture}[remember picture,overlay]
+        \begin{scope}[shift={(1,1.65)}]
+            \begin{axis}[
+                mlineplot,
+                width = 0.8\textwidth,
+                height = 3.5cm,
+                % ticks = none,
+                % xmin = 0.5,
+                % xmax = 10.5,
+                xticklabels=\empty,
+                xmajorgrids=true,
+                ymin = -1,
+                ymax = 18,
+                % ymode = log,
+                % xlabel = Samples,
+                ylabel = Solve time,
+                axis line style = thick,
+                legend style={
+                    at={(0.5,1)},
+                    font=\scriptsize,
+                    anchor=south,
+                    legend columns=-1,
+                    legend style={/tikz/every even column/.append style={column sep=0.25cm}}
+                }
+            ]
+
+            \addplot[ultra thick, color=Firebrick4] table[x=samples,y=l0_time,col sep=comma]{data/transition_phase.csv};
+            \addlegendentry{L0-norm}
+
+            \addplot[ultra thick, color=DarkGoldenrod1] table[x=samples,y=l1_time,col sep=comma]{data/transition_phase.csv};
+            \addlegendentry{L1-norm}
+            \end{axis}
+        \end{scope}
+        %
+        \begin{scope}[shift={(1,-0.65)}]
+            \begin{axis}[
+                mlineplot,
+                width = 0.8\textwidth,
+                height = 3.5cm,
+                xticklabels=\empty,
+                % ticks = none,
+                % xmin = 0.5,
+                % xmax = 10.5,
+                ymin = 45,
+                ymax = 105,
+                % ymode = log,
+                % xlabel = Samples,
+                ylabel = Accuracy \%,
+                axis line style = thick,
+                legend style={
+                    at={(0.5,1)},
+                    font=\scriptsize,
+                    anchor=south,
+                    legend columns=-1,
+                    legend style={/tikz/every even column/.append style={column sep=0.25cm}}
+                }
+            ]
+
+            \addplot[ultra thick, color=Firebrick4] table[x=samples,y=l0_acc,col sep=comma]{data/transition_phase.csv};
+
+            \addplot[ultra thick, color=DarkGoldenrod1] table[x=samples,y=l1_acc,col sep=comma]{data/transition_phase.csv};
+            \end{axis}
+        \end{scope}
+        %
+        \begin{scope}[shift={(1,-2.9)}]
+            \begin{axis}[
+                mlineplot,
+                width = 0.8\textwidth,
+                height = 3.5cm,
+                % ticks = none,
+                % xmin = 0.5,
+                % xmax = 10.5,
+                ymin = -5,
+                ymax = 105,
+                % ymode = log,
+                xlabel = Samples,
+                ylabel = False alarm \%,
+                axis line style = thick,
+                legend style={
+                    at={(0.5,1)},
+                    font=\scriptsize,
+                    anchor=south,
+                    legend columns=-1,
+                    legend style={/tikz/every even column/.append style={column sep=0.25cm}}
+                }
+            ]
+
+            \addplot[ultra thick, color=Firebrick4] table[x=samples,y=l0_fa,col sep=comma]{data/transition_phase.csv};
+            \addplot[ultra thick, color=DarkGoldenrod1] table[x=samples,y=l1_fa,col sep=comma]{data/transition_phase.csv};
+            \end{axis}
+        \end{scope}
+        %
+        %
+        %
+        \node (sparsereg) at ($(current page.north)+(4.75,-0.4\textheight)$) {\textbf{Sparse regression}};
+        \node (eq) at ($(sparsereg)+(0,-0.05\textheight)$) {$\obs = \dic\pv^{\dagger} + \boldsymbol{\epsilon}$};
+        \node (features) at ($(eq)+(0,-0.05\textheight)$) {2.000 features};
+        \node (relevant) at ($(features)+(0,-0.05\textheight)$) {10 non-zeros in $\pv^{\dagger}$};
+        \node (noise) at ($(relevant)+(0,-0.05\textheight)$) {20dB noise};
+        \node (source) at ($(current page.south)+(-0.5,0.025\textheight)$) {\textit{\tiny{D. Bertsimas and B. Van Parys, Sparse High-Dimensional Regression: Exact Scalable Algorithms and Phase Transitions}}};
+    \end{tikzpicture}
+\end{frame}
